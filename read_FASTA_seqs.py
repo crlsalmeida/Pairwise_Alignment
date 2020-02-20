@@ -29,16 +29,23 @@ def read_fasta(fasta1, fasta2, cwd = workingdirectory):
     os.chdir(workingdirectory)
     s1 = ''
     s2 = ''
+    title1 = ''
+    title2 = ''
     with open(fasta1, 'r') as FASTA1:
         for line in FASTA1.readlines():
-            if not line[0] == '>':
+            if line[0] == '>':
+                title1 = line
+            elif not line[0] == '>':
                 s1 += line.rstrip()
     with open(fasta2, 'r') as FASTA2:
         for line in FASTA2.readlines():
-            if not line[0] == '>':
+            if line[0] == '>':
+                title2 = line
+            elif not line[0] == '>':
                 s2 += line.rstrip()
-    return s1,s2
+    return s1,s2, title1, title2
        
 A = read_fasta(fasta1, fasta2)[0]
 B = read_fasta(fasta1, fasta2)[1]
-
+titleseq1 = read_fasta(fasta1, fasta2)[2]
+titleseq2 = read_fasta(fasta1, fasta2)[3]
