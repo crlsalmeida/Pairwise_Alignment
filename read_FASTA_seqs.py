@@ -26,6 +26,13 @@ fasta2 = "YOYOYO.fasta"
 # Run the following section to retrive the sequence from fasta files as strings variables A and B
 
 def read_fasta(fasta1, fasta2, cwd = workingdirectory):
+    
+    '''
+    This function opens 2 .fasta files
+    It will return the first line of both .fasta files as 'title1' and 'title2'
+    It will return both sequences as strings
+    
+    '''
     os.chdir(workingdirectory)
     s1 = ''
     s2 = ''
