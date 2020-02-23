@@ -17,8 +17,7 @@ import pandas as pd
 A = "GAATTCAGTTA"
 B = "GGATCGA"
 
-
-# Needleman-Wunsch Function==================================================================================
+# Global alignment score is 11
 
 # ScrMtrx corresponds to the Score Matrix for the alignment
 # By default, this function is set to align nucleotide sequences
@@ -36,7 +35,7 @@ def NeedlemanWunsch(s1,s2, GapScore = GapScore, ScrMtrx = NucScrTbl, SeqType = N
         Define ScrMtrx as either 'NucScrTbl' for nucleotide sequences
         Or 'PAM250', 'BLOSUM62', etc. for AA sequences provided the tables were loaded as described in the 'AASeq' function
     A GapScore is required to use this function, whether you are aligning amino acids or nucleotides
-        If you are aligning AAs, simply asign a dummy value
+        If you are aligning AAs, simply assign a dummy value
         As a safety precaution, this function will check if you are aligning AA or nucleotides, and adjust the GapScore accordingly
     
     '''
