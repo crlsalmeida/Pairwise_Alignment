@@ -17,25 +17,42 @@ import pandas as pd
 A = "GAATTCAGTTA"
 B = "GGATCGA"
 
-# Default Scoring System
-# This can be adjusted here, or when running the 'Matrix' function (see below)
 
-Match = 5
-Mismatch = -3
-Gap = -4
+# Needleman-Wunsch Function==================================================================================
 
-# The default scores for Match, Mismatch, and Gap can be adjusted when running the function
+# ScrMtrx corresponds to the Score Matrix for the alignment
+# ScrFunc1 and ScrFunc2 correspond to the functions needed to align the sequences
+# By default, this function is set to align nucleotide sequences
+# To align amino acid sequencues, specify the ScrMtrx (PAM250, BLOSUM62, NucScrTbl) and SeqType (AASeq or NucSeq)
+# Futher instructions in the 'Results' section of this script 
 
-def NeedlemanWunsch(s1,s2, MatchScore = Match, MismatchScore = Mismatch, GapScore = Gap):
+def NeedlemanWunsch(s1,s2, GapScore = GapScore, ScrMtrx = NucScrTbl, SeqType = NucSeq):
+    
+    '''
+    
+    This function performs a Needleman-Wunsch global sequence alignment without affine gap penalty
+    By default, this is set up to align nucleotide sequences, SeqType
+        Define the SeqType as either 'NucSeq' for nucleotide sequences
+        Or 'AASeq' for amino acid sequences
+    The default scoring matrix, ScrMtrx, is a nucleotide score matrix
+        Define ScrMtrx as either 'NucScrTbl' for nucleotide sequences
+        Or 'PAM250', 'BLOSUM62', etc. for AA sequences provided the tables were loaded as described in the 'AASeq' function
+    A GapScore is required to use this function, whether you are aligning amino acids or nucleotides
+        If you are aligning nucleotides, simply asign a dummy value
+        As a safety precaution, this function will check if you are aligning AA or nucleotides, and adjust the GapScore accordingly
+    
+    '''
     
     # Set up values for Matrices
     
     n = len(s1) # n is associated with x, i
     m = len(s2) # m is associated with y, j
-    S = {True: MatchScore, False: MismatchScore} # Define S for 'Match/Mismatch' equation
-    d = GapScore
     s1L = list(s1.strip()) # convert s1 string to list
     s2L = list(s2.strip()) # convert s2 string to list
+    if SeqType is NucSeq:
+        d = GapScore
+    else:
+        d = ScrMtrx[0,-1]
     
     # Create Score Matrix
     
@@ -57,7 +74,12 @@ def NeedlemanWunsch(s1,s2, MatchScore = Match, MismatchScore = Mismatch, GapScor
         
     for j in range(1,len(s1)+1): # Note that here, j corresponds to s1
         for i in range(1,len(s2)+1): # Note that here, i corresponds to s2
-            Match = M[i-1][j-1] + S[s1[j-1]==s2[i-1]]
+            ch1 = s1[j-1]
+            ch2 = s2[i-1]
+            rowidx = SeqType(ch1, ch2, ScrMtrx)[0]
+            colidx = SeqType(ch1, ch2, ScrMtrx)[1]
+            S = ScrMtrx[rowidx, colidx]
+            Match = M[i-1][j-1] + S
             Delete = M[i-1][j] + d
             Insert = M[i][j-1] + d
             M[i,j] = max(Match, Delete, Insert)
@@ -116,6 +138,7 @@ def NeedlemanWunsch(s1,s2, MatchScore = Match, MismatchScore = Mismatch, GapScor
     AlgM = np.matrix([A1List,A2List,A3List])
             
     return M,D,As1,Alg,As2,AlignmentScore,AlgM
+
 
 Seq1 = NeedlemanWunsch(A,B)[2]
 AlignmentLabels = NeedlemanWunsch(A,B)[3]
