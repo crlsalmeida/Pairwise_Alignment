@@ -21,10 +21,8 @@ B = "GGATCGA"
 # Needleman-Wunsch Function==================================================================================
 
 # ScrMtrx corresponds to the Score Matrix for the alignment
-# ScrFunc1 and ScrFunc2 correspond to the functions needed to align the sequences
 # By default, this function is set to align nucleotide sequences
-# To align amino acid sequencues, specify the ScrMtrx (PAM250, BLOSUM62, NucScrTbl) and SeqType (AASeq or NucSeq)
-# Futher instructions in the 'Results' section of this script 
+# To align sequencues, specify the ScrMtrx (PAM250, BLOSUM62, NucScrTbl) and SeqType (AASeq or NucSeq)
 
 def NeedlemanWunsch(s1,s2, GapScore = GapScore, ScrMtrx = NucScrTbl, SeqType = NucSeq):
     
