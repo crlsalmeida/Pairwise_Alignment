@@ -35,9 +35,7 @@ def NeedlemanWunsch(s1,s2, GapScore = GapScore, ScrMtrx = NucScrTbl, SeqType = N
         Define ScrMtrx as either 'NucScrTbl' for nucleotide sequences
         Or 'PAM250', 'BLOSUM62', etc. for AA sequences provided the tables were loaded as described in the 'AASeq' function
     A GapScore is required to use this function, whether you are aligning amino acids or nucleotides
-        If you are aligning AAs, simply assign a dummy value
-        As a safety precaution, this function will check if you are aligning AA or nucleotides, and adjust the GapScore accordingly
-    
+
     '''
     
     # Set up values for Matrices
@@ -46,11 +44,8 @@ def NeedlemanWunsch(s1,s2, GapScore = GapScore, ScrMtrx = NucScrTbl, SeqType = N
     m = len(s2) # m is associated with y, j
     s1L = list(s1.strip()) # convert s1 string to list
     s2L = list(s2.strip()) # convert s2 string to list
-    if SeqType is NucSeq:
-        d = GapScore
-    else:
-        d = ScrMtrx[0,-1]
-    
+    d = GapScore
+        
     # Create Score Matrix
     
     M = np.zeros((m+1, n+1)) # create Score Matrix
