@@ -7,6 +7,8 @@ Author Notes:
 
 The scripts in this folder were part of a graduate level introductory bioinformatics project.
 
+Affine gap penalties are not implemented in these aligners.
+
 Feel free to use my codes, build upon them, etc.
 
 For those who can read, understand, and execute my code, you will get the correct alignment and aligment scores at the very least.
