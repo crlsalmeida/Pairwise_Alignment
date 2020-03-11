@@ -1,7 +1,9 @@
 # Pairwise_Alignment
 Needleman-Wunsh and Smith-Waterman scripts in Python
 
+
 Author Notes:
+
 
 The scripts in this folder were part of a graduate level introductory bioinformatics project.
 
@@ -12,7 +14,9 @@ For those who can read, understand, and execute my code, you will get the correc
 Note, there are different ways to traceback the alignment. Depending on how one writes the code and prioritizes the traceback,
 the alignment and gap locations may vary. That is, my traceback (and alignment) may vary from somebody else's at a few locations.
 
+
 Files:
+
 
 Cmd_promp_Pairwise_Sequence_Aligner.py
   - This file allows the user to align 2 sequences in FASTA format using a command prompt window
