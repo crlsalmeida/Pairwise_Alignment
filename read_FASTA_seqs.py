@@ -28,8 +28,8 @@ fasta2 = "YOYOYO.fasta"
 def read_fasta(fasta1, fasta2, cwd = workingdirectory):
     
     '''
-    This function opens 2 .fasta files
-    It will return the first line of both .fasta files as 'title1' and 'title2'
+    This function opens 2 FASTA files
+    It will return the first line of both FASTA files as 'title1' and 'title2'
     It will return both sequences as strings
     
     '''
