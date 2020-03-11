@@ -7,8 +7,6 @@ Final edits on March 10 2020
 """
 # Analysis Preparation========================================================================================
 
-
-print("\n")
 print("\n")
 
 print("Greeting.")
