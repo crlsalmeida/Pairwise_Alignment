@@ -52,11 +52,11 @@ Global_SeqAlignedArray = NeedlemanWunsch(A,B, GapScore = GapScore, ScrMtrx = BLO
 
 # Name the text file
 # ex: "MyAlignedSequences.txt"
-title = 'AlignedSeqs.txt'
+title = 'MyAlignedSequences.txt'
 
 # Alignment refers to the type of alignment, NeedlemanWunsh or SmithWaterman
 
-def save_output (title, Alignment, s1, s2, GapScore = GapScore, ScrMtrx = NucScrTbl, SeqType = NucSeq, titleseq1 = titleseq1, titleseq2 = titleseq2):
+def save_output (title, Alignment, s1, s2, GapScore, ScrMtrx, SeqType, titleseq1, titleseq2):
     output = open(title,'w+')
     output.write('\n')
     output.write("Sequence 1:")
@@ -67,14 +67,16 @@ def save_output (title, Alignment, s1, s2, GapScore = GapScore, ScrMtrx = NucScr
     output.write('\n')
     output.write(titleseq2)
     output.write('\n')
+    output.write('\n')
     output.write("Alignment Score:")
     output.write('\n')
-    output.write(str(Alignment(A,B)[6]))
+    output.write(str(Alignment(s1,s2, GapScore, ScrMtrx, SeqType)[6]))
     output.write('\n')
     output.write('\n')
-    output.write('\n'.join(map(str, Alignment(A,B)[8])))
+    output.write('\n'.join(map(str, Alignment(s1,s2, GapScore, ScrMtrx, SeqType)[8])))
     output.close()
     print("Task completed.")
+ 
     
 
-save_output (title, NeedlemanWunsch, A, B)
+# save_output (title, Alignment, s1, s2, GapScore, ScrMtrx, SeqType, titleseq1, titleseq2)
